@@ -1,9 +1,9 @@
-import RateCheck from "@/components/RateCheck";
 import NumberInput from "@/components/NumberInput";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { presetTipRates } from "@/constants";
 import Price from "@/components/Price";
+import RateCheck from "@/components/RateCheck";
+import { presetTipRates } from "@/constants";
 import { faDollar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const [billText, setBillText] = useState("");
