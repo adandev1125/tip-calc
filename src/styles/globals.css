@@ -7,5 +7,10 @@ body {
 }
 
 input {
-  @apply border-2 rounded-md bg-inputNormal border-inputNormal focus:border-[#8ac6bb] outline-none pl-8 pr-2 py-1 text-lg text-right transition-all;
+  @apply w-full border-2 rounded-md bg-inputNormal border-inputNormal focus:border-[#8ac6bb] 
+    outline-none px-2 py-1 text-lg text-right transition-all caret-buttonNormal;
+}
+
+button {
+  @apply rounded-md text-lg py-2 px-8 transition-all active:scale-95;
 }

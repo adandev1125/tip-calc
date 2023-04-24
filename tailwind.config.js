@@ -11,7 +11,6 @@ module.exports = {
         lightText: '#707d7d',
         buttonActive: '#abeadf',
         buttonNormal: '#1b464b',
-        inputError: '#b48777',
         inputNormal: '#f4f8fb'
       },
       letterSpacing: {
