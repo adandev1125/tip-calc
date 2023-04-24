@@ -34,8 +34,10 @@ const NumberInput: FC<InputProps> = memo((props: InputProps) => {
     <div className="relative flex flex-row items-center">
       <input
         className={
-          (props.isError ? "border-red-600" : "border-inputNormal") +
-          (props.label === undefined || props.label.length === 0 ? "" : "pl-8")
+          (props.isError
+            ? "border-red-600 focus:border-red-600"
+            : "border-inputNormal focus:border-inputNormal") +
+          (props.label === undefined || props.label.length === 0 ? "" : " pl-8")
         }
         placeholder={props.placeholder}
         maxLength={30}

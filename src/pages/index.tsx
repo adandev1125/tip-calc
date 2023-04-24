@@ -6,6 +6,7 @@ import Price from "@/components/Price";
 
 export default function Home() {
   const [selectedRate, setSelectedRate] = useState(0);
+  const [peopleInputError, setPeopleInputError] = useState("");
 
   const onBillChanged = useCallback((text: "") => {
     console.log(text);
@@ -17,6 +18,17 @@ export default function Home() {
 
   const onCustomRateChanged = useCallback((text: "") => {
     setSelectedRate(parseInt(text));
+  }, []);
+
+  const onNumberOfPeopleChanged = useCallback((text: "") => {
+    const number = parseInt(text);
+    if (number === 0) {
+      setPeopleInputError("Can't be zero");
+    } else if (number < 0) {
+      setPeopleInputError("Must greater than zero");
+    } else {
+      setPeopleInputError("");
+    }
   }, []);
 
   return (
@@ -56,12 +68,19 @@ export default function Home() {
 
           <div className="mt-10 flex w-full justify-between">
             <span className="text-lightText">Number of People</span>
-            <span className="text-red-600">Number of People</span>
+            <span
+              className={
+                "text-red-600 transition-all" +
+                (peopleInputError.length > 0 ? "opacity-100" : "opacity-0")
+              }
+            >
+              {peopleInputError}
+            </span>
           </div>
           <NumberInput
             isDouble={false}
-            isError={false}
-            onChange={onCustomRateChanged}
+            isError={peopleInputError.length > 0}
+            onChange={onNumberOfPeopleChanged}
             label="👨‍⚕️"
             placeholder="0"
           />
@@ -70,7 +89,7 @@ export default function Home() {
         <div className="flex flex-col w-full h-full bg-[#1b474b] rounded-xl px-8 py-12 justify-between">
           <div>
             <Price caption="Tip Amount" price={0} />
-            <Price caption="Tip Amount" price={0} />
+            <Price caption="Total" price={0} />
           </div>
           <button className="w-full bg-buttonActive text-buttonNormal uppercase">
             Reset
