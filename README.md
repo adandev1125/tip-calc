@@ -7,6 +7,6 @@ No server apis.
 
 All is done on the client side.
 
-You can see the live working on []
+You can see the live working on [https://adan-tipcalc-com.onrender.com/](https://adan-tipcalc-com.onrender.com/)
 
 Thanks.
