@@ -3,6 +3,7 @@ import NumberInput from "@/components/NumberInput";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { presetTipRates } from "@/constants";
 import Price from "@/components/Price";
+import { faDollar, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [billText, setBillText] = useState("");
@@ -78,7 +79,7 @@ export default function Home() {
           <NumberInput
             value={billText}
             isError={false}
-            label="$"
+            icon={faDollar}
             onChange={onBillChanged}
             placeholder="0"
           />
@@ -118,7 +119,7 @@ export default function Home() {
             isDouble={false}
             isError={peopleInputError.length > 0}
             onChange={onNumberOfPeopleChanged}
-            label="👨‍⚕️"
+            icon={faUser}
             placeholder="0"
           />
         </div>
