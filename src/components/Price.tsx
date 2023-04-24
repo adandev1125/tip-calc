@@ -19,4 +19,6 @@ const Price = memo((props: { caption: string; price: number }) => (
   </div>
 ));
 
+Price.displayName = 'Price';
+
 export default Price;

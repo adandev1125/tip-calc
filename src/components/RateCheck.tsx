@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const Button = memo(
+const RateCheck = memo(
   (props: { caption: string; isSelected: boolean; onClick: Function }) => {
     return (
       <button
@@ -17,4 +17,6 @@ const Button = memo(
   }
 );
 
-export default Button;
+RateCheck.displayName = 'RateCheck';
+
+export default RateCheck;

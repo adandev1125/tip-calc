@@ -59,4 +59,6 @@ NumberInput.defaultProps = {
   isError: false,
 };
 
+NumberInput.displayName = 'NumberInput';
+
 export default NumberInput;
