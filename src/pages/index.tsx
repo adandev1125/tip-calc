@@ -1,27 +1,60 @@
 import RateCheck from "@/components/RateCheck";
 import NumberInput from "@/components/NumberInput";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { presetTipRates } from "@/constants";
 import Price from "@/components/Price";
 
 export default function Home() {
+  const [billText, setBillText] = useState("");
+  const [peopleNumberText, setPeopleNumberText] = useState("");
+  const [customRateText, setCustomRateText] = useState("");
   const [selectedRate, setSelectedRate] = useState(0);
   const [peopleInputError, setPeopleInputError] = useState("");
 
+  const prices = useMemo(() => {
+    const bill = parseFloat(billText);
+    const peopleNumber = parseFloat(peopleNumberText);
+
+    if (isNaN(bill) || isNaN(peopleNumber)) {
+      return {
+        tipAmount: 0,
+        total: 0,
+      };
+    }
+
+    const tipAmount = (bill / peopleNumber) * selectedRate;
+    return {
+      tipAmount,
+      total: bill / peopleNumber + tipAmount,
+    };
+  }, [billText, peopleNumberText, selectedRate]);
+
   const onBillChanged = useCallback((text: "") => {
-    console.log(text);
+    setBillText(text);
   }, []);
 
-  const onTipRateClick = useCallback((rate: number) => {
+  const onTipRateSelected = useCallback((rate: number) => {
     setSelectedRate(rate);
   }, []);
 
   const onCustomRateChanged = useCallback((text: "") => {
-    setSelectedRate(parseInt(text));
+    setCustomRateText(text);
+    setSelectedRate(parseInt(text) / 100);
   }, []);
 
   const onNumberOfPeopleChanged = useCallback((text: "") => {
-    const number = parseInt(text);
+    setPeopleNumberText(text);
+  }, []);
+
+  const onReset = useCallback(() => {
+    setBillText("");
+    setPeopleNumberText("");
+    setCustomRateText("");
+    setSelectedRate(0);
+  }, []);
+
+  useEffect(() => {
+    const number = parseInt(peopleNumberText);
     if (number === 0) {
       setPeopleInputError("Can't be zero");
     } else if (number < 0) {
@@ -29,7 +62,7 @@ export default function Home() {
     } else {
       setPeopleInputError("");
     }
-  }, []);
+  }, [peopleNumberText]);
 
   return (
     <main className="flex flex-col items-center justify-center w-full h-[100vh] space-y-16">
@@ -43,6 +76,7 @@ export default function Home() {
         <div className="flex flex-col">
           <span className="text-lightText">Bill</span>
           <NumberInput
+            value={billText}
             isError={false}
             label="$"
             onChange={onBillChanged}
@@ -53,12 +87,14 @@ export default function Home() {
           <div className="grid grid-cols-3 gap-2">
             {presetTipRates.map((rate: number) => (
               <RateCheck
+                key={rate}
                 isSelected={selectedRate === rate}
                 caption={rate * 100 + "%"}
-                onClick={onTipRateClick.bind(null, rate)}
+                onClick={onTipRateSelected.bind(null, rate)}
               />
             ))}
             <NumberInput
+              value={customRateText}
               isDouble={false}
               isError={false}
               onChange={onCustomRateChanged}
@@ -78,6 +114,7 @@ export default function Home() {
             </span>
           </div>
           <NumberInput
+            value={peopleNumberText}
             isDouble={false}
             isError={peopleInputError.length > 0}
             onChange={onNumberOfPeopleChanged}
@@ -88,10 +125,13 @@ export default function Home() {
 
         <div className="flex flex-col w-full h-full bg-[#1b474b] rounded-xl px-8 py-12 justify-between">
           <div>
-            <Price caption="Tip Amount" price={0} />
-            <Price caption="Total" price={0} />
+            <Price caption="Tip Amount" price={prices.tipAmount} />
+            <Price caption="Total" price={prices.total} />
           </div>
-          <button className="w-full bg-buttonActive text-buttonNormal uppercase">
+          <button
+            className="w-full bg-buttonActive text-buttonNormal uppercase"
+            onClick={onReset}
+          >
             Reset
           </button>
         </div>

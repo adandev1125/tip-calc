@@ -5,6 +5,7 @@
 import { FC, memo, useCallback, useState } from "react";
 
 interface InputProps {
+  value?: string;
   label?: string; // The left fixed string.
   isDouble?: boolean; // Indicates whether to input double or int. Use for validation.
   isError?: boolean; // Indicates whether input has error. Use for display error borders.
@@ -13,8 +14,6 @@ interface InputProps {
 }
 
 const NumberInput: FC<InputProps> = memo((props: InputProps) => {
-  const [value, setValue] = useState("");
-
   const onChanged = useCallback((event: any) => {
     const text = event.target.value;
 
@@ -26,7 +25,6 @@ const NumberInput: FC<InputProps> = memo((props: InputProps) => {
       return;
     }
 
-    setValue(text);
     props.onChange(text);
   }, []);
 
@@ -41,10 +39,10 @@ const NumberInput: FC<InputProps> = memo((props: InputProps) => {
         }
         placeholder={props.placeholder}
         maxLength={30}
-        value={value}
+        value={props.value}
         onChange={onChanged}
       />
-      <span className="absolute left-2 text-gray-300">{props.label}</span>
+      <span className="absolute left-2 text-[#a4bcbe]">{props.label}</span>
     </div>
   );
 });

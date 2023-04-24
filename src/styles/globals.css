@@ -12,5 +12,5 @@ input {
 }
 
 button {
-  @apply rounded-md text-lg py-2 px-8 transition-all active:scale-95;
+  @apply rounded-md text-lg py-2 transition-all active:scale-95;
 }
