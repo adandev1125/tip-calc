@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: #cae4e7;
+  @apply bg-[#cae4e7] font-mono;
+
 }
