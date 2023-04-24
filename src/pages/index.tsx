@@ -35,6 +35,7 @@ export default function Home() {
   }, []);
 
   const onTipRateSelected = useCallback((rate: number) => {
+    setCustomRateText("");
     setSelectedRate(rate);
   }, []);
 
@@ -73,7 +74,7 @@ export default function Home() {
         tter
       </div>
 
-      <div className="grid grid-cols-2 gap-8 p-6 bg-white shadow-xl rounded-2xl w-[50%]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 p-6 bg-white shadow-xl rounded-2xl w-full sm:w-[90%] md:w-[80%] lg:w-[60%]">
         <div className="flex flex-col">
           <span className="text-lightText">Bill</span>
           <NumberInput
