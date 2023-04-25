@@ -35,7 +35,7 @@ const NumberInput: FC<InputProps> = memo((props: InputProps) => {
         className={
           (props.isError
             ? "border-red-600 focus:border-red-600"
-            : "border-inputNormal focus:border-inputNormal") +
+            : "border-inputNormal focus:border-[#5bc2a9]") +
           (props.icon === undefined ? "" : " pl-8")
         }
         placeholder={props.placeholder}
