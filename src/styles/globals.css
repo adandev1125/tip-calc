@@ -8,7 +8,7 @@ body {
 
 input {
   @apply w-full border-2 rounded-md bg-inputNormal border-inputNormal focus:border-[#8ac6bb] 
-    outline-none px-2 py-1 text-lg text-right transition-all caret-buttonNormal;
+    outline-none px-2 py-1 text-lg text-right transition-all caret-buttonNormal text-buttonNormal font-extrabold;
 }
 
 button {
