@@ -131,7 +131,8 @@ export default function Home() {
             <Price caption="Total" price={prices.total} />
           </div>
           <button
-            className="w-full bg-buttonActive text-buttonNormal uppercase"
+            className="w-full bg-buttonActive text-buttonNormal uppercase disabled:opacity-50"
+            disabled={prices.tipAmount <= 0 && prices.total <= 0}
             onClick={onReset}
           >
             Reset
