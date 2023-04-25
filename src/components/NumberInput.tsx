@@ -7,6 +7,7 @@ import { FC, memo, useCallback } from "react";
 
 interface InputProps {
   value?: string;
+  maxValue?: number;
   icon?: any; // The fixed icon on the left.
   isDouble?: boolean; // Indicates whether to input double or int. Use for validation.
   isError?: boolean; // Indicates whether input has error. Use for display error borders.
@@ -23,6 +24,17 @@ const NumberInput: FC<InputProps> = memo((props: InputProps) => {
 
     // Checks the input value. If fails, value doesn't change.
     if (text.length > 0 && validRegExp.test(text) === false) {
+      return;
+    }
+
+    // Checks whether input value exceeds max value
+    const floatValue = parseFloat(text);
+    if (
+      props.maxValue !== undefined &&
+      !isNaN(floatValue) &&
+      floatValue > props.maxValue
+    ) {
+      props.onChange(props.maxValue.toString());
       return;
     }
 
@@ -59,6 +71,6 @@ NumberInput.defaultProps = {
   isError: false,
 };
 
-NumberInput.displayName = 'NumberInput';
+NumberInput.displayName = "NumberInput";
 
 export default NumberInput;

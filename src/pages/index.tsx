@@ -97,6 +97,7 @@ export default function Home() {
             ))}
             <NumberInput
               value={customRateText}
+              maxValue={100}
               isDouble={false}
               isError={false}
               onChange={onCustomRateChanged}
