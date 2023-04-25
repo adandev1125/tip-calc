@@ -16,7 +16,7 @@ export default function Home() {
     const bill = parseFloat(billText);
     const peopleNumber = parseFloat(peopleNumberText);
 
-    if (isNaN(bill) || isNaN(peopleNumber)) {
+    if (isNaN(bill) || isNaN(peopleNumber) || selectedRate === 0) {
       return {
         tipAmount: 0,
         total: 0,
@@ -41,7 +41,10 @@ export default function Home() {
 
   const onCustomRateChanged = useCallback((text: "") => {
     setCustomRateText(text);
-    setSelectedRate(parseInt(text) / 100);
+
+    const intValue = parseInt(text);
+
+    setSelectedRate(isNaN(intValue) ? 0 : intValue / 100);
   }, []);
 
   const onNumberOfPeopleChanged = useCallback((text: "") => {
