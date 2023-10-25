@@ -14,3 +14,13 @@ input {
 button {
   @apply rounded-md text-lg py-2 transition-all active:scale-95;
 }
+
+a {
+  font-weight: bold;
+  color: #446263
+}
+
+.container {
+  @apply grid grid-cols-2 gap-8 bg-white shadow-xl rounded-2xl flex-1 w-full p-8;
+  grid-template-columns: auto 1fr;
+}
